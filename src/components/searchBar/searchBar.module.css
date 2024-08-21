@@ -30,6 +30,7 @@
   border: 1px solid #fff;
   background-color: transparent;
   right: 0;
+  color: #fff;
 }
 ::placeholder {
   color: #fff;

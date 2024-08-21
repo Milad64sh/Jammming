@@ -1,5 +1,5 @@
 const clientId = 'a8190e3b46674bb48c60e87f3239b9bf';
-const redirectUri = 'http://localhost:3000/';
+const redirectUri = 'http://localhost:3000/callback';
 
 let accessToken;
 
@@ -30,14 +30,14 @@ const Spotify = {
       const state = generateRandomString(16);
 
       localStorage.setItem(stateKey, state);
-      const accessUrl = `https://accounts.spotify.com/authorize?response_type=token&client_id=${clientId}&scope=playlist-modify-public&redirect_uri=${redirectUri}&state=${state}`;
+      const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
       window.location = accessUrl;
     }
   },
 
   trackSearch(term) {
     const accessToken = Spotify.getAccessToken();
-    return fetch(`https://api.spotify.com/v1/search?type=track&=${term}`, {
+    return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
@@ -46,6 +46,7 @@ const Spotify = {
         return response.json();
       })
       .then((jsonResponse) => {
+        console.log('response:', jsonResponse);
         if (!jsonResponse.tracks) {
           return [];
         }
@@ -59,7 +60,7 @@ const Spotify = {
       });
   },
 
-  savePlaylists(name, trackUris) {
+  savePlaylist(name, trackUris) {
     if (!name || !trackUris.length) {
       return;
     }
