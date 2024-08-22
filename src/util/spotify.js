@@ -17,19 +17,9 @@ const Spotify = {
       window.history.pushState('Access Token', null, '/');
       return accessToken;
     } else {
-      function generateRandomString(length) {
-        let text = '';
-        const possible =
-          'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        for (let i = 0; i < length; i++) {
-          text += possible.charAt(Math.floor(Math.random() * possible.length));
-        }
-        return text;
-      }
       const stateKey = 'spotify_auth_state';
-      const state = generateRandomString(16);
 
-      localStorage.setItem(stateKey, state);
+      localStorage.setItem(stateKey);
       const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=playlist-modify-public&redirect_uri=${redirectUri}`;
       window.location = accessUrl;
     }
