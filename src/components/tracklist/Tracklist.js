@@ -1,20 +1,16 @@
 import React from 'react';
-import styles from './tracklist.module.css';
 import Track from '../track/Track';
+import { useSpotify } from '../../context/spotifyContext';
+import styles from './tracklist.module.css';
 
 const TrackList = (props) => {
+  const { searchResults } = useSpotify();
   return (
     <>
       <div className={styles.container}>
-        {props.tracks.map((track) => {
+        {searchResults.map((track) => {
           return (
-            <Track
-              track={track}
-              key={track.id}
-              onAdd={props.onAdd}
-              isRemoval={props.isRemoval}
-              onRemove={props.onRemove}
-            />
+            <Track track={track} key={track.id} isRemoval={props.isRemoval} />
           );
         })}
       </div>

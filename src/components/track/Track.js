@@ -1,19 +1,9 @@
-import React, { useCallback } from 'react';
+import React from 'react';
+import { useSpotify } from '../../context/spotifyContext';
 import styles from './track.module.css';
 
 const Track = (props) => {
-  const addTrack = useCallback(
-    (track) => {
-      props.onAdd(props.track);
-    },
-    [props]
-  );
-  const removeTrack = useCallback(
-    (track) => {
-      props.onRemove(props.onAdd);
-    },
-    [props]
-  );
+  const { addTrack, removeTrack } = useSpotify();
 
   const renderAction = () => {
     if (props.isRemoval) {

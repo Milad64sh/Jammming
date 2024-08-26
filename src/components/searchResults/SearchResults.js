@@ -2,12 +2,12 @@ import React from 'react';
 import styles from './searchResults.module.css';
 import Tracklist from '../tracklist/Tracklist';
 
-const SearchResults = (props) => {
+const SearchResults = () => {
   return (
     <>
       <div className={styles.container}>
         <h2>Results</h2>
-        <Tracklist tracks={props.searchResults} onAdd={props.onAdd} />
+        <Tracklist isRemoval={true} />
       </div>
     </>
   );
