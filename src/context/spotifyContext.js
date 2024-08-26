@@ -20,6 +20,8 @@ const SpotifyProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [userName, setUserName] = useState('');
+  const [choice, setChoice] = useState('All');
+  const [searchInput, setSearchInput] = useState('');
 
   const getAuth = () => {
     const scope = [
@@ -93,41 +95,59 @@ const SpotifyProvider = ({ children }) => {
     }
   }, [accessToken, getUserName]);
 
-  // const redirectToSpotifyAuth = () => {
-
-  //   const accessUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&scope=${scope}&redirect_uri=${redirectUri}`;
-  //   window.location = accessUrl;
-  // };
-
   // SEARCH
 
-  const trackSearch = useCallback(
-    (term) => {
-      return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
+  const handleSearchChange = useCallback((e) => {
+    const term = e.target.value;
+    setSearchInput(term);
+  }, []);
+
+  const getFilterChoice = (choice) => {
+    setChoice(choice);
+    handleSearchChange();
+  };
+
+  const filteredSearchData = useCallback(() => {
+    if (choice === 'Title') {
+      return searchResults.filter((track) =>
+        track.name.toLowerCase().includes(searchInput.toLowerCase())
+      );
+    } else if (choice === 'Artist') {
+      return searchInput.filter((track) =>
+        track.artists[0].name.toLowerCase().includes(searchInput.toLowerCase())
+      );
+    } else {
+      return searchResults;
+    }
+  }, [searchInput, searchResults, choice]);
+
+  const trackSearch = useCallback(() => {
+    return fetch(
+      `https://api.spotify.com/v1/search?type=track&q=${searchInput}`,
+      {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
-      })
-        .then((response) => response.json())
-        .then((jsonResponse) => {
-          if (!jsonResponse.tracks) {
-            setSearchResults([]);
-          } else {
-            setSearchResults(
-              jsonResponse.tracks.items.map((track) => ({
-                id: track.id,
-                name: track.name,
-                artist: track.artists[0].name,
-                album: track.album.name,
-                image: track.album.images[0].url,
-                uri: track.uri,
-              }))
-            );
-          }
-        });
-    },
-    [accessToken]
-  );
+      }
+    )
+      .then((response) => response.json())
+      .then((jsonResponse) => {
+        if (!jsonResponse.tracks) {
+          setSearchResults([]);
+        } else {
+          setSearchResults(
+            jsonResponse.tracks.items.map((track) => ({
+              id: track.id,
+              name: track.name,
+              artist: track.artists[0].name,
+              album: track.album.name,
+              image: track.album.images[0].url,
+              uri: track.uri,
+            }))
+          );
+        }
+      });
+  }, [searchInput, accessToken]);
 
   // ADD TRACK
 
@@ -249,6 +269,8 @@ const SpotifyProvider = ({ children }) => {
         isLogged,
         isLoading,
         userName,
+        choice,
+        searchInput,
         searchResults,
         playlistName,
         playlistTracks,
@@ -260,6 +282,8 @@ const SpotifyProvider = ({ children }) => {
         createPlaylist,
         getAuth,
         getUserName,
+        filteredSearchData,
+        getFilterChoice,
         logout,
       }}
     >

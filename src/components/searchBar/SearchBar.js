@@ -1,27 +1,23 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { IoSearchSharp } from 'react-icons/io5';
 import styles from './searchBar.module.css';
 import { useSpotify } from '../../context/spotifyContext';
-const SearchBar = (props) => {
-  const { trackSearch } = useSpotify();
-  const [term, setTerm] = useState('');
-
-  const handleSearchChange = useCallback((e) => {
-    setTerm(e.target.value);
-  }, []);
+import SearchBtns from '../../ui/SearchBtns';
+const SearchBar = () => {
+  const { trackSearch, searchInput, handleSearchChange } = useSpotify();
 
   useEffect(() => {
     const search = (event) => {
       if (event.key === 'Enter') {
-        trackSearch(term);
+        trackSearch(searchInput);
       }
-      console.log(term);
+      console.log(searchInput);
     };
     document.addEventListener('keydown', search);
     return () => {
       document.removeEventListener('keydown', search);
     };
-  }, [term]);
+  }, [searchInput, trackSearch]);
 
   return (
     <>
@@ -42,6 +38,7 @@ const SearchBar = (props) => {
             <IoSearchSharp />
           </div>
         </div>
+        <SearchBtns />
       </div>
     </>
   );
