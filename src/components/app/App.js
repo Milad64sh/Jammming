@@ -5,6 +5,7 @@ import SearchResults from '../searchResults/SearchResults';
 import Playlist from '../playlist/Playlist';
 import { useSpotify } from '../../context/spotifyContext';
 import { FaHeadphones } from 'react-icons/fa';
+import { SiSoundcloud } from 'react-icons/si';
 
 function App() {
   const {
@@ -26,12 +27,20 @@ function App() {
   if (!isLogged) {
     return (
       <>
-        <div className={styles.logo}>
-          <FaHeadphones />
+        <div className={styles.container}>
+          <div className={styles.login}>
+            <div className={styles.logo}>
+              <SiSoundcloud />
+            </div>
+            <h2>
+              jam<span>m</span>ming
+            </h2>
+            <p>Make your own playlist</p>
+            <button className={styles.loginBtn} onClick={() => getAuth()}>
+              Login
+            </button>
+          </div>
         </div>
-        <h2>jammming</h2>
-        <p>Make your own playlist</p>
-        <button onClick={() => getAuth()}>Login</button>
       </>
     );
   } else {
