@@ -49,17 +49,21 @@ function App() {
         <div className={styles.username}>
           <h2>Welcome {userName}</h2>
         </div>
-        <div className={styles.contentContainer}>
-          <SearchResults />
-          <Playlist
-            playlistName={playlistName}
-            playlistTracks={playlistTracks}
-            onNameChange={updatePlaylistName}
-            onRemove={removeTrack}
-            onSave={savePlaylist}
-          />
-          <button onClick={() => logout()}>logout</button>
+        <div className={styles.containers}>
+          <div className={styles.container}>
+            <SearchResults />
+          </div>
+          <div className={styles.container}>
+            <Playlist
+              playlistName={playlistName}
+              playlistTracks={playlistTracks}
+              onNameChange={updatePlaylistName}
+              onRemove={removeTrack}
+              onSave={savePlaylist}
+            />
+          </div>
         </div>
+        <button onClick={() => logout()}>logout</button>
       </div>
     );
   }
