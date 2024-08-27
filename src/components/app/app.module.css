@@ -19,6 +19,7 @@
   border-radius: 10px;
   box-shadow: 0px 0px 10px #f9f231;
   background-color: #0a100d99;
+  height: 200px;
   @media screen and (max-width: 767px) {
     margin: 3rem auto;
     width: 90%;
@@ -64,11 +65,4 @@ span {
 
 .loginBtn:hover {
   background-color: #ccc625;
-}
-
-.username {
-  color: #fff;
-  text-transform: capitalize;
-  margin: 3rem;
-  text-align: center;
 }

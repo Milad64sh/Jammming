@@ -6,8 +6,10 @@ const SearchResults = () => {
   return (
     <>
       <div className={styles.container}>
-        <h2>Results</h2>
-        <Tracklist isRemoval={true} />
+        <h2>Search Results</h2>
+        <div className={styles.trackContainer}>
+          <Tracklist isRemoval={true} />
+        </div>
       </div>
     </>
   );

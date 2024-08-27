@@ -4,7 +4,7 @@ import styles from './searchBar.module.css';
 import { useSpotify } from '../../context/spotifyContext';
 import SearchBtns from '../../ui/SearchBtns';
 const SearchBar = () => {
-  const { trackSearch, searchInput, handleSearchChange } = useSpotify();
+  const { trackSearch, searchInput, handleSearchChange, logout } = useSpotify();
 
   useEffect(() => {
     const search = (event) => {
@@ -41,6 +41,10 @@ const SearchBar = () => {
             <SearchBtns />
           </div>
         </div>
+
+        <button className={styles.logoutBtn} onClick={() => logout()}>
+          logout
+        </button>
       </div>
     </>
   );

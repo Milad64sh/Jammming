@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.input {
+  background-color: transparent;
+  border: 1px solid #f9f231;
+  color: #f9f231;
+  padding: 0.45rem;
+  border-radius: 10px;
+  width: 90%;
+  margin: 1rem;
+}
+.input::placeholder {
+  font-style: italic;
+  color: #999;
+}
+.saveBtn {
+  background-color: #f9f231;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.saveBtn:hover {
+  background-color: #d3cd27;
+}

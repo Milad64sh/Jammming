@@ -5,19 +5,18 @@ import SearchResults from '../searchResults/SearchResults';
 import Playlist from '../playlist/Playlist';
 import { useSpotify } from '../../context/spotifyContext';
 import { SiSoundcloud } from 'react-icons/si';
+import Header from '../header/Header';
 
 function App() {
   const {
     isLogged,
     isLoading,
-    userName,
     playlistName,
     playlistTracks,
     savePlaylist,
     updatePlaylistName,
     removeTrack,
     getAuth,
-    logout,
   } = useSpotify();
   if (isLoading) {
     return <div>Loading...</div>; // Show loading indicator
@@ -46,9 +45,7 @@ function App() {
     return (
       <div className={styles.App}>
         <SearchBar />
-        <div className={styles.username}>
-          <h2>Welcome {userName}</h2>
-        </div>
+        <Header />
         <div className={styles.containers}>
           <div className={styles.container}>
             <SearchResults />
@@ -63,7 +60,6 @@ function App() {
             />
           </div>
         </div>
-        <button onClick={() => logout()}>logout</button>
       </div>
     );
   }
