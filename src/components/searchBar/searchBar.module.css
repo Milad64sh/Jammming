@@ -13,7 +13,7 @@
 }
 
 .span {
-  color: #ff5112;
+  color: #f9f231;
 }
 
 .inputContainer {
@@ -42,4 +42,9 @@
   right: 1rem;
   font-size: 1.5rem;
   color: #fff;
+}
+.btns {
+  position: absolute;
+  top: 3.75rem;
+  width: 100%;
 }

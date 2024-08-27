@@ -11,7 +11,7 @@ const SearchBtns = () => {
     setIsActive(i);
   };
   return (
-    <div>
+    <div className={styles.btnContainer}>
       {choices.map((choice, i) => (
         <button
           key={choice}
@@ -21,7 +21,9 @@ const SearchBtns = () => {
             getFilterChoice(choice);
             handleSearchChange();
           }}
-          className={isActive === i ? styles.focus : styles.nonfocus}
+          className={`${styles.btn} ${
+            isActive === i ? styles.focus : styles.nonfocus
+          }`}
         >
           {choice}
         </button>

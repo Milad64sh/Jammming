@@ -37,8 +37,10 @@ const SearchBar = () => {
           <div className={styles.icon}>
             <IoSearchSharp />
           </div>
+          <div className={styles.btns}>
+            <SearchBtns />
+          </div>
         </div>
-        <SearchBtns />
       </div>
     </>
   );

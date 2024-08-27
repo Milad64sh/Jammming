@@ -11,7 +11,8 @@ body {
       rgba(10, 16, 13, 0.5)
     ),
     url('../src/assets/images/background.jpg');
-  background-position: top;
+  background-position: center;
+  background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }

@@ -4,7 +4,6 @@ import SearchBar from '../searchBar/SearchBar';
 import SearchResults from '../searchResults/SearchResults';
 import Playlist from '../playlist/Playlist';
 import { useSpotify } from '../../context/spotifyContext';
-import { FaHeadphones } from 'react-icons/fa';
 import { SiSoundcloud } from 'react-icons/si';
 
 function App() {
@@ -46,17 +45,21 @@ function App() {
   } else {
     return (
       <div className={styles.App}>
-        <h2>Welcome {userName}</h2>
         <SearchBar />
-        <SearchResults />
-        <Playlist
-          playlistName={playlistName}
-          playlistTracks={playlistTracks}
-          onNameChange={updatePlaylistName}
-          onRemove={removeTrack}
-          onSave={savePlaylist}
-        />
-        <button onClick={() => logout()}>logout</button>
+        <div className={styles.username}>
+          <h2>Welcome {userName}</h2>
+        </div>
+        <div className={styles.contentContainer}>
+          <SearchResults />
+          <Playlist
+            playlistName={playlistName}
+            playlistTracks={playlistTracks}
+            onNameChange={updatePlaylistName}
+            onRemove={removeTrack}
+            onSave={savePlaylist}
+          />
+          <button onClick={() => logout()}>logout</button>
+        </div>
       </div>
     );
   }
