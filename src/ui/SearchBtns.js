@@ -5,7 +5,7 @@ import styles from './searchBtns.module.css';
 const choices = ['Title', 'Artist', 'All'];
 const SearchBtns = () => {
   const [isActive, setIsActive] = useState('');
-  const { getFilterChoice, handleSearchChange } = useSpotify();
+  const { getFilterChoice } = useSpotify();
 
   const handleClick = (i) => {
     setIsActive(i);
@@ -19,7 +19,6 @@ const SearchBtns = () => {
           onClick={() => {
             handleClick(i);
             getFilterChoice(choice);
-            handleSearchChange();
           }}
           className={`${styles.btn} ${
             isActive === i ? styles.focus : styles.nonfocus

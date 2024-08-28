@@ -97,6 +97,48 @@ const SpotifyProvider = ({ children }) => {
 
   // SEARCH
 
+  const search = useCallback(
+    async (term, choice) => {
+      let query = term;
+      if (choice === 'Title') {
+        query = `track:${term}`;
+      } else if (choice === 'Artist') {
+        query = `artist:${term}`;
+      }
+      try {
+        const response = await fetch(
+          `https://api.spotify.com/v1/search?type=track&q=${encodeURIComponent(
+            query
+          )}`,
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        if (!response.ok) {
+          throw new Error('Request failed!');
+        }
+        const jsonResponse = await response.json();
+        if (!jsonResponse.tracks) {
+          return [];
+        }
+        return jsonResponse.tracks.items.map((track) => ({
+          id: track.id,
+          name: track.name,
+          artist: track.artists[0].name,
+          album: track.album.name,
+          image: track.album.images[0]?.url,
+          uri: track.uri,
+        }));
+      } catch (err) {
+        console.error('Error fetching search results:', err);
+        return [];
+      }
+    },
+    [accessToken]
+  );
+
   const handleSearchChange = useCallback((e) => {
     const term = e.target.value;
     setSearchInput(term);
@@ -104,7 +146,7 @@ const SpotifyProvider = ({ children }) => {
 
   const getFilterChoice = (choice) => {
     setChoice(choice);
-    handleSearchChange();
+    trackSearch(choice);
   };
 
   const filteredSearchData = useCallback(() => {
@@ -122,33 +164,39 @@ const SpotifyProvider = ({ children }) => {
   }, [searchInput, searchResults, choice]);
 
   const trackSearch = useCallback(() => {
-    console.log(searchInput);
-    return fetch(
-      `https://api.spotify.com/v1/search?type=track&q=${searchInput}`,
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((jsonResponse) => {
-        if (!jsonResponse.tracks) {
-          setSearchResults([]);
-        } else {
-          setSearchResults(
-            jsonResponse.tracks.items.map((track) => ({
-              id: track.id,
-              name: track.name,
-              artist: track.artists[0].name,
-              album: track.album.name,
-              image: track.album.images[0].url,
-              uri: track.uri,
-            }))
-          );
-        }
-      });
-  }, [searchInput, accessToken]);
+    search(searchInput, choice).then((results) => {
+      setSearchResults(results);
+    });
+  }, [searchInput, choice, search]);
+
+  // const trackSearch = useCallback(() => {
+  //   console.log(searchInput);
+  //   return fetch(
+  //     `https://api.spotify.com/v1/search?type=track&q=${searchInput}`,
+  //     {
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //     }
+  //   )
+  //     .then((response) => response.json())
+  //     .then((jsonResponse) => {
+  //       if (!jsonResponse.tracks) {
+  //         setSearchResults([]);
+  //       } else {
+  //         setSearchResults(
+  //           jsonResponse.tracks.items.map((track) => ({
+  //             id: track.id,
+  //             name: track.name,
+  //             artist: track.artists[0].name,
+  //             album: track.album.name,
+  //             image: track.album.images[0].url,
+  //             uri: track.uri,
+  //           }))
+  //         );
+  //       }
+  //     });
+  // }, [searchInput, accessToken]);
 
   // ADD TRACK
 
@@ -275,7 +323,9 @@ const SpotifyProvider = ({ children }) => {
         searchResults,
         playlistName,
         playlistTracks,
+        handleSearchChange,
         trackSearch,
+        search,
         addTrack,
         removeTrack,
         savePlaylist,

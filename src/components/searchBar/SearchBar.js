@@ -4,20 +4,21 @@ import styles from './searchBar.module.css';
 import { useSpotify } from '../../context/spotifyContext';
 import SearchBtns from '../../ui/SearchBtns';
 const SearchBar = () => {
-  const { trackSearch, searchInput, handleSearchChange, logout } = useSpotify();
+  const { search, searchInput, choice, handleSearchChange, logout } =
+    useSpotify();
 
   useEffect(() => {
-    const search = (event) => {
+    const searchEvent = async (event) => {
       if (event.key === 'Enter') {
-        trackSearch(searchInput);
+        search(searchInput, choice);
       }
       console.log(searchInput);
     };
-    document.addEventListener('keydown', search);
+    document.addEventListener('keydown', searchEvent);
     return () => {
-      document.removeEventListener('keydown', search);
+      document.removeEventListener('keydown', searchEvent);
     };
-  }, [searchInput, trackSearch]);
+  }, [searchInput, search, choice]);
 
   return (
     <>
