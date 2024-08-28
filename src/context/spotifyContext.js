@@ -122,6 +122,7 @@ const SpotifyProvider = ({ children }) => {
   }, [searchInput, searchResults, choice]);
 
   const trackSearch = useCallback(() => {
+    console.log(searchInput);
     return fetch(
       `https://api.spotify.com/v1/search?type=track&q=${searchInput}`,
       {

@@ -25,7 +25,7 @@ function App() {
   if (!isLogged) {
     return (
       <>
-        <div className={styles.container}>
+        <div className={styles.loginContainer}>
           <div className={styles.login}>
             <div className={styles.logo}>
               <SiSoundcloud />
