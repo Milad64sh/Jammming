@@ -1,6 +1,59 @@
+.container {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 0 5px #f9f231;
+  width: 90%;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.textContainer {
+  flex: 0 0 90%;
+}
+.img {
+  width: 5rem;
+  height: auto;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
 .h3 {
   color: #fff;
+  margin: 0;
+  margin-left: 0.25rem;
 }
 .p {
   color: #fff;
+  margin: 0;
+  margin-left: 0.25rem;
+  width: 80%;
+}
+
+.actionContainer {
+  display: flex;
+  width: 2rem;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100%;
+  right: 2rem;
+  position: absolute;
+  @media screen and (max-width: 767px) {
+    right: 0.25rem;
+  }
+}
+.btn {
+  background-color: #f9f231;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 30px;
+  cursor: pointer;
+  @media screen and (max-width: 767px) {
+    padding: 10px;
+  }
+}
+.btn:hover {
+  background-color: #d3cd29;
 }

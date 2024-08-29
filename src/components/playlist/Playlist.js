@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import styles from './playlist.module.css';
-import Tracklist from '../tracklist/Tracklist';
 import { useSpotify } from '../../context/spotifyContext';
+import TrackList from '../tracklist/Tracklist';
 const Playlist = (props) => {
   const { savePlaylist } = useSpotify();
   const handleNameChange = useCallback(
@@ -17,14 +17,9 @@ const Playlist = (props) => {
           name='name'
           className={styles.input}
           onChange={handleNameChange}
-          // defaultValue={'New Playlist'}
           placeholder='type your playlist name'
         />
-        <Tracklist
-          tracks={props.playlistTracks}
-          isRemoval={true}
-          onRemove={props.onRemove}
-        />
+        <TrackList tracks={props.playlistTracks} isRemoval={true} />
         <button className={styles.saveBtn} onClick={savePlaylist}>
           SAVE TO SPOTIFY
         </button>

@@ -12,12 +12,14 @@ function App() {
     isLogged,
     isLoading,
     playlistName,
-    playlistTracks,
     savePlaylist,
     updatePlaylistName,
+    playlistTracks,
+    searchResults,
     removeTrack,
     getAuth,
   } = useSpotify();
+
   if (isLoading) {
     return <div>Loading...</div>; // Show loading indicator
   }
@@ -48,7 +50,7 @@ function App() {
         <Header />
         <div className={styles.containers}>
           <div className={styles.container}>
-            <SearchResults />
+            <SearchResults searchResults={searchResults} />
           </div>
           <div className={styles.container}>
             <Playlist

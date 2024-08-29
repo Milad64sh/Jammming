@@ -169,35 +169,6 @@ const SpotifyProvider = ({ children }) => {
     });
   }, [searchInput, choice, search]);
 
-  // const trackSearch = useCallback(() => {
-  //   console.log(searchInput);
-  //   return fetch(
-  //     `https://api.spotify.com/v1/search?type=track&q=${searchInput}`,
-  //     {
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`,
-  //       },
-  //     }
-  //   )
-  //     .then((response) => response.json())
-  //     .then((jsonResponse) => {
-  //       if (!jsonResponse.tracks) {
-  //         setSearchResults([]);
-  //       } else {
-  //         setSearchResults(
-  //           jsonResponse.tracks.items.map((track) => ({
-  //             id: track.id,
-  //             name: track.name,
-  //             artist: track.artists[0].name,
-  //             album: track.album.name,
-  //             image: track.album.images[0].url,
-  //             uri: track.uri,
-  //           }))
-  //         );
-  //       }
-  //     });
-  // }, [searchInput, accessToken]);
-
   // ADD TRACK
 
   const addTrack = useCallback(
@@ -208,6 +179,16 @@ const SpotifyProvider = ({ children }) => {
     },
     [playlistTracks]
   );
+
+  // REMOVE TRACK FUNCTION
+
+  const removeTrack = useCallback((track) => {
+    setPlaylistTracks((prevTracks) =>
+      prevTracks.filter((currentTrack) => currentTrack.id !== track.id)
+    );
+  }, []);
+
+  // SAVE PLAYLIST
 
   const savePlaylist = useCallback(() => {
     const trackUris = playlistTracks.map((track) => track.uri);
@@ -252,20 +233,6 @@ const SpotifyProvider = ({ children }) => {
       });
   }, [playlistName, playlistTracks, accessToken, userId]);
 
-  // UPDATE PLAYLIST NAME
-
-  const updatePlaylistName = useCallback((name) => {
-    setPlaylistName(name);
-  }, []);
-
-  // REMOVE TRACK FUNCTION
-
-  const removeTrack = useCallback((track) => {
-    setPlaylistTracks((prevTracks) =>
-      prevTracks.filter((currentTrack) => currentTrack.id !== track.id)
-    );
-  }, []);
-
   // PLAYLIST CREATION LOGIC
 
   const createPlaylist = (name, trackUris) => {
@@ -302,6 +269,12 @@ const SpotifyProvider = ({ children }) => {
           });
       });
   };
+
+  // UPDATE PLAYLIST NAME
+
+  const updatePlaylistName = useCallback((name) => {
+    setPlaylistName(name);
+  }, []);
 
   // LOGOUT
   const logout = () => {

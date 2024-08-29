@@ -2,23 +2,32 @@ import React from 'react';
 import { useSpotify } from '../../context/spotifyContext';
 import styles from './track.module.css';
 
-const Track = (props) => {
+const Track = ({ track, isRemoval }) => {
   const { addTrack, removeTrack } = useSpotify();
-
-  const renderAction = () => {
-    if (props.isRemoval) {
-      return <button onClick={removeTrack}>-</button>;
+  const handleAction = () => {
+    if (isRemoval) {
+      removeTrack(track);
+    } else {
+      addTrack(track);
     }
-    return <button onClick={addTrack}>+</button>;
   };
 
   return (
     <>
-      <h3 className={styles.h3}>{props.track.name}</h3>
-      <p className={styles.p}>
-        {props.track.artist} | {props.track.album}
-      </p>
-      {renderAction()}
+      <div className={styles.container}>
+        <img className={styles.img} src={track.image} alt='album cover' />
+        <div className={styles.textContainer}>
+          <h4 className={styles.h3}>{track.name}</h4>
+          <p className={styles.p}>
+            {track.artist} | {track.album}
+          </p>
+        </div>
+        <div className={styles.actionContainer}>
+          <button className={styles.btn} onClick={handleAction}>
+            {isRemoval ? '-' : '+'}
+          </button>
+        </div>
+      </div>
     </>
   );
 };
