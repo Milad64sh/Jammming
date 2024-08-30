@@ -19,7 +19,9 @@ const Playlist = (props) => {
           onChange={handleNameChange}
           placeholder='type your playlist name'
         />
-        <TrackList tracks={props.playlistTracks} isRemoval={true} />
+        <div className={styles.trackContainer}>
+          <TrackList tracks={props.playlistTracks} isRemoval={true} />
+        </div>
         <button className={styles.saveBtn} onClick={savePlaylist}>
           SAVE TO SPOTIFY
         </button>

@@ -1,8 +1,12 @@
 .username {
   color: #fff;
   text-transform: capitalize;
-  margin: 3rem;
+  margin: 3rem auto;
   text-align: center;
+  width: 40%;
+  @media screen and (max-width: 767px) {
+    width: 90%;
+  }
 }
 .p {
   font-style: italic;

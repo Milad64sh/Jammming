@@ -6,6 +6,7 @@ import Playlist from '../playlist/Playlist';
 import { useSpotify } from '../../context/spotifyContext';
 import { SiSoundcloud } from 'react-icons/si';
 import Header from '../header/Header';
+import Footer from '../footer/Footer';
 
 function App() {
   const {
@@ -62,6 +63,7 @@ function App() {
             />
           </div>
         </div>
+        <Footer />
       </div>
     );
   }

@@ -23,6 +23,7 @@
   height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
+  margin-bottom: 2rem;
   @media screen and (max-width: 767px) {
     margin: 3rem auto;
     width: 90%;
@@ -30,6 +31,12 @@
 }
 .container::-webkit-scrollbar {
   background-color: transparent;
+  width: 8px;
+}
+.container::-webkit-scrollbar-thumb {
+  background-color: rgb(233, 231, 231);
+  border-radius: 10px;
+  border: none;
 }
 .loginContainer {
   display: flex;

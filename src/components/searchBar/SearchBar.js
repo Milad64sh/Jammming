@@ -28,6 +28,20 @@ const SearchBar = () => {
             jam<span className={styles.span}>m</span>ming
           </h2>
         </div>
+        {/* small screen */}
+        <div className={styles.smallScreen}>
+          <div className={styles.smallScreenLogo}>
+            <h2>
+              jam<span className={styles.span}>m</span>ming
+            </h2>
+          </div>
+          <button
+            className={styles.smallScreenLogoutBtn}
+            onClick={() => logout()}
+          >
+            logout
+          </button>
+        </div>
         <div className={styles.inputContainer}>
           <input
             className={styles.input}

@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  width: 70%;
+  color: #fff;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  @media screen and (max-width: 767px) {
+    width: 90%;
+  }
+}
+
+.contact {
+  flex: 0 0 10%;
+  font-size: 1.25rem;
+  display: flex;
+  justify-content: space-around;
+}
